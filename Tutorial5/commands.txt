@@ -1,0 +1,4 @@
+cd
+echo Jason Is The Best
+echo Jason wishes
+echo Albert is the god

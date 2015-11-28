@@ -1,0 +1,31 @@
+!SESSION 2015-10-23 19:43:11.884 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.ui 2 0 2015-10-23 19:44:15.502
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2015-10-23 19:44:15.502
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.ui 2 0 2015-10-23 19:44:17.651
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2015-10-23 19:44:17.651
+!MESSAGE Commands should really have a category: plug-in='org.eclipse.linuxtools.systemtap.ui.graphing', id='org.eclipse.linuxtools.systemtap.ui.graphing.commands.SaveGraphImage', categoryId='org.eclipse.linuxtools.systemtap.ui.graphing.category.file'
+
+!ENTRY org.eclipse.core.resources 4 77 2015-10-23 19:46:19.024
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2015-10-23 19:46:19.024
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2015-10-23 19:46:19.024
+!MESSAGE /home/uoitstudent/Desktop/git_project/OperatingSystem/OperatingSystems overlaps the workspace location: /home/uoitstudent/Desktop/git_project/OperatingSystem/OperatingSystems
+
+!ENTRY org.eclipse.core.resources 4 77 2015-10-23 19:48:49.517
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2015-10-23 19:48:49.517
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2015-10-23 19:48:49.517
+!MESSAGE /home/uoitstudent/Desktop/git_project/OperatingSystem/OperatingSystems overlaps the workspace location: /home/uoitstudent/Desktop/git_project/OperatingSystem/OperatingSystems

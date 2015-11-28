@@ -1,0 +1,12 @@
+cd <directory> - Change the current default directory to <directory>. If the <directory> argument is not present, report the current directory.
+clr - Clear the screen. 
+dir <directory> - List the contents of directory <directory>.
+environ - List all the environment strings.
+echo <comment> - Display <comment> on the display followed by a new line.
+help - Display the user manual using the more filter.
+pause - Pause operation of the shell until 'Enter' is pressed.
+quit - Quit the shell.
+I/O Redirection - programName arg1 arg2 < input.txt > output.txt. 
+	Enter a program name with either input or output direction, or both. 
+	Input redirection: < followed by input.txt file. 
+	Output redirection: < followed by the output file. << can be used to append to the file if the file already has content in it.

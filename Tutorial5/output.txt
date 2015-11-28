@@ -1,0 +1,7 @@
+Enter an integer: Casul entered the number 23
+Enter an integer: Casul entered the number 23
+./commandArgs
+1
+2
+3
+Enter an integer: Casul entered the number 23

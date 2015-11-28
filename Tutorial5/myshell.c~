@@ -1,0 +1,159 @@
+/*
+ * MyShell Project for SOFE 3950U / CSCI 3020U: Operating Systems
+ *
+ * Copyright (C) 2015, Albert Fung 100520898, Jason Runzer 100520992, Nicholas Gregorio 100514374
+ * All rights reserved.
+ * 
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+#include "utility.h"
+#include "myshell.h"
+#include <pwd.h>
+#include <errno.h>
+#include <dirent.h>
+#include <termios.h>
+#include <unistd.h>
+
+// Put macros or constants here using #define
+#define BUFFER_LEN 256
+
+// Put global environment variables here
+int userID;
+char *userName;
+char currentpath[BUFFER_LEN];
+char oldPath[BUFFER_LEN];
+char buffer[];
+char command[BUFFER_LEN] = { 0 };
+char arg[BUFFER_LEN] = { 0 };
+
+// Define functions declared in myshell.h here
+
+int launch(char **args) //Code from http://stephen-brennan.com/2015/01/16/write-a-shell-in-c/
+{
+	pid_t pid;
+	int status;
+
+	pid = fork(); //Fork the processes, store result of operation to pid
+	setenv("PARENT",
+			"/Desktop/git_project/OperatingSystem/OperatingSystems/myshell", 1);
+	if (pid == 0) {
+
+		//Child process
+		if (execvp(args[0], args) == -1) { //If error in executing child process, display system error.
+			perror("Child Process");
+		}
+
+		exit(EXIT_FAILURE);
+	} else if (pid < 0) {
+		// Error forking
+		perror("Fork");
+	} else {
+		// Parent process
+		do {
+			waitpid(pid, &status, WUNTRACED); //Wait for child process to complete
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+
+	}
+
+	return 1;
+}
+//tokenizes the arguments that the user inputs or a line from the file
+void tokenize() {
+	//Reinitialize arg
+	strcpy(arg, "");
+
+	// Perform string tokenization to get the command and argument
+	char* token = strtok(buffer, " \n");
+	int i = 0;
+	while (token) {
+		//printf("%s \n", token);
+		if (i == 0) {
+			strcpy(command, token);
+		} else {
+			//adds a space in between each argument for echo
+			if (i > 1)
+				strcat(arg, " ");
+			strcat(arg, token);
+
+		}
+		i++;
+
+		token = strtok(NULL, " \n");
+	}
+}
+
+int main(int argc, char *argv[]) {
+	// Input buffer and and commands
+
+
+
+	//get the username of the current user
+	userName = getlogin();
+
+	//if executed in the terminal, the userName pointer will not be null
+	if (userName == NULL)
+		userName = "user";
+
+	//executed if there is a file name as a command line argument
+	if (argc > 1) {
+
+		//open the command file
+		FILE *fp;
+		FILE *output;
+		if ((fp = fopen(argv[1], "r")) == NULL) {
+			printf("Error, file not found");
+			exit(1);
+		}
+		if (argc > 2) {
+
+				if (strcmp(argv[2], ">") == 0){
+
+					output = freopen(argv[3], "w", stdout);
+				}
+				else if (strcmp(argv[2], ">>") == 0) {
+
+					output = freopen(argv[3], "a", stdout);
+				}
+				else {
+					printf("Input / Output redirection invalid. Use help to display the manual.\n");
+					exit(1);
+				}
+			}
+		//keep executing a command from the file until there are no commands left.
+		while (fgets(buffer,BUFFER_LEN,fp) != NULL) {
+			//tokenize the commands from the single line
+			tokenize();
+			execute_command(command, arg);
+		}
+		fclose(fp);
+		fclose(stdout);
+		exit(0);
+
+	}
+
+	//prints the username and path of the user
+	normal_display();
+
+	// Parse the commands provided using argc and argv
+
+	// Perform an infinite loop getting command input from users
+	while (fgets(buffer, BUFFER_LEN, stdin) != NULL) {
+		setenv("SHELL",
+				"/Desktop/git_project/OperatingSystem/OperatingSystems/myshell ",
+				1);
+		tokenize(command,arg);
+		execute_command(command, arg);
+		//printenv SHELL;
+		launch(arg); //Execute fork method
+		normal_display();
+	}
+
+	return EXIT_SUCCESS;
+
+}
